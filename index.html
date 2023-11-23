@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- Nav bar -->
+    <nav class="navbar navbar-expand-lg sticky-top bg-black">
+        <div class="container-fluid">
+
+            <!-- DeepNets name -->
+            <a class="navbar-brand text-white fw-bold ps-5" href="https://github.com/DeepNets-US">DeepNets</a>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" aria-current="page" href="#">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#history">History</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#gamesection">Gameplay</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#howto">How to Play?</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="pageContents p-3">
+
+        <!-- Main Section Image (Banner)-->
+        <div class="bannerimgcnt">
+            <img src="Images/Banner.png" class="img-fluid" alt="Blackjack Banner" id="banner">
+        </div>
+
+        <!-- Game Section -->
+        <div class="gamesection" id="gamesection">
+
+            <!-- Game Name -->
+            <div class="gameName">
+                <h1 class="text-dark fw-bold"><span>.</span> <span>.</span> <span>.</span> <span>.</span>
+                    <span>B</span><span>l</span><span>a</span><span>c</span><span>k</span>
+                    <span>J</span><span>a</span><span>c</span><span>k</span> <span>.</span> <span>.</span>
+                    <span>.</span>
+                    <span>.</span>
+                </h1>
+            </div>
+
+            <!-- Money and Bet -->
+            <div class="gameMB">
+                <div class="money">
+                    <h3>Money : $<span id="moneyTxt">5000</span></h3s>
+                </div>
+
+                <div class="bet">
+                    <div class="label">
+                        <h3 class="text-end">Bet: </h3>
+                    </div>
+
+                    <div class="betIn">
+                        <input type="number" placeholder="Enter Bet ($)" class="bet" id="betIn">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Image Display -->
+            <div class="gameDisplay">
+
+                <div class="dealer">
+                    <div id="carouselDealer" class="carousel slide">
+                        <div class="carousel-inner" id="dealerHand">
+                            <div class="carousel-item active">
+                                <img src="Deck/question.png" alt="Question Mark Image">
+                            </div>
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselDealer"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselDealer"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="player">
+                    <div id="carouselPlayer" class="carousel slide">
+                        <div class="carousel-inner" id="playerHand">
+                            <div class="carousel-item active">
+                                <img src="Deck/question.png" alt="Question Mark Image">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPlayer"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselPlayer"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Scores -->
+            <div class="gameScores">
+                <div class="dealerScore">
+                    <h2>Dealer: <span id="dealerScore">???</span></h2>
+                </div>
+
+                <div class="playerScore">
+                    <h2>Player: <span id="playerScore">???</span></h2>
+                </div>
+            </div>
+
+            <!-- Game Result -->
+            <div class="gameRes">
+                <h2 class="gameResTxt" id="gameResTxt"></h2>
+            </div>
+
+            <!-- Game Actions -->
+            <div class="gamemoves">
+                <button class="btn btn-outline-light rounded-1" id="hitbtn">Hit <i
+                        class="bi bi-suit-heart-fill"></i></button>
+                <button class="btn btn-outline-light rounded-1" id="standbtn">Stand <i
+                        class="bi bi-emoji-smile-fill"></i></button>
+                <button class="btn btn-outline-light rounded-1" id="doublebtn">Double Down <i
+                        class="bi bi-cash-coin"></i></button>
+            </div>
+        </div>
+
+        <!-- How to Play? -->
+        <div class="howto container-fluid" id="howto">
+            <h1 id="howtotext">How to Play ⁉️</h1>
+
+            <div class="howtodata m-5">
+
+                <div class="objdiv">
+                    <h2>🎯Objective</h2>
+                    <p>In the captivating game of Blackjack, the ultimate goal is to strategically assemble a hand whose
+                        total value approaches 21, outshining the dealer's hand without surpassing this pivotal number.
+                        <br>
+                        <br>
+                        It's a gripping balance between accumulating card values and evading the perilous "bust," where
+                        each
+                        decision - whether to "Hit," "Stand," "Double Down," or potentially "Split" - dictates the
+                        course of
+                        the game.
+                        <br>
+                        <br>
+                        Victory hinges on crafting a hand that eclipses the dealer's without succumbing to the
+                        risk of going over 21, making every move a calculated step towards Blackjack triumph.
+                    </p>
+                </div>
+
+                <div class="actdiv">
+                    <h2>👉 Actions</h2>
+
+                    <ul class="actdesc">
+                        <li>
+                            <h3 class="actionname">🎯 Hit:</h3>
+                            <ul>
+                                <li>Choose to "Hit" to receive an additional card from the deck.</li>
+                                <li>Keep hitting until satisfied with your hand or until it exceeds 21 (busts).</li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <h3 class="actionname">🧍 Stand:</h3>
+                            <ul>
+                                <li>Opt to "Stand" to keep your current hand and end your turn.</li>
+                                <li>This action signifies you're content with your hand and ready for the dealer's turn.
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <h3 class="actionname">💵 Double Down:</h3>
+                            <ul>
+                                <li>Double your initial bet and receive only one additional card.</li>
+                                <li>Usually done when confident of winning with the next card.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card Image -->
+                <div class="imgdiv">
+                    <img src="Images/HowToPlay.png" class="howtoimg" alt="Cards Image">
+                </div>
+            </div>
+        </div>
+
+
+        <!-- History of the game -->
+        <div class="history" id="history">
+            <h1 id="howtotext">History of the Game 🗺️</h1>
+
+            <div class="historydiv p-2">
+                <div class="historyimg">
+                    <img src="Images/history.png" alt="historical map">
+                </div>
+
+                <div class="historytext">
+                    <p> Blackjack, also known as 21, boasts a rich and intriguing history that traces its origins
+                        back several centuries. While the exact beginnings remain a bit murky, the game's roots can be
+                        linked to various European gambling activities.
+                        <br>
+                        <br>
+                        The game's predecessor likely emerged in France during the 1700s, known as "Vingt-et-Un" (French
+                        for
+                        "21"). This early version resembled the Blackjack we know today, involving a combination of
+                        betting
+                        and attempting to reach a hand total closest to 21 without going over. Vingt-et-Un gained
+                        popularity
+                        in
+                        French casinos before making its way across Europe.
+                        <br>
+                        <br>
+                        Upon reaching the shores of America, particularly in the 19th century, the game underwent
+                        significant transformations. To entice players, casinos offered bonuses for specific card
+                        combinations, notably
+                        an Ace of Spades along with a Jack of either spades or clubs. These combinations were termed
+                        "blackjacks," thus giving rise to the game's eventual name.
+                        <br>
+                        <br>
+                        During the Prohibition era in the United States, Blackjack continued to flourish, even in
+                        underground gambling establishments. Its allure grew further when Nevada legalized gambling in
+                        the
+                        1930s,
+                        solidifying Blackjack's position as a casino staple. Casinos introduced additional rules and
+                        variations, refining the game and making it more appealing to players.
+                        <br>
+                        <br>
+                        In the 1960s, Blackjack's popularity soared with the publication of Edward O. Thorp's book,
+                        "Beat
+                        the Dealer." Thorp's work presented strategies and card-counting techniques that offered players
+                        a
+                        potential edge against the house, revolutionizing how Blackjack was perceived and played.
+                        <br>
+                        <br>
+                        Today, Blackjack stands as one of the most beloved and widely played casino games globally. Its
+                        blend of skill, strategy, and chance continues to captivate players, cementing its enduring
+                        status
+                        as a
+                        classic in the world of gambling.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audios -->
+        <div class="audios">
+            <audio id="betSound" src="Audios/bet.wav"></audio>
+            <audio id="clickSound" src="Audios/click.wav"></audio>
+            <audio id="winSound" src="Audios/win.mp3"></audio>
+            <audio id="brokeSound" src="Audios/lost all.mp3"></audio>
+            <audio id="bruhSound" src="Audios/bruh.mp3"></audio>
+        </div>
+
+
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
