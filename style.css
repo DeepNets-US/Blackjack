@@ -236,8 +236,14 @@ body {
     }
 
     /* Game Section */
+    .label {
+        display: none;
+    }
+
+    .betIn input,
+    .money h3,
     .gameName h1 {
-        font-size: 1.2em;
+        font-size: 1em !important;
     }
 
     .bet {
