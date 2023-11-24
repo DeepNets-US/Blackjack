@@ -219,16 +219,49 @@ body {
     }
 }
 
-@media (max-width: 768px) {
+
+/* Tabley Screens */
+@media (max-width: 800px) {
+
+    /* Nav Bar */
+    .navbar-brand {
+        padding: 0;
+        font-size: 2em;
+        margin: auto;
+    }
+
+    /* Banner Image */
+    .bannerimgcnt img {
+        content: url("Images/Blackjack\ -\ Phone\ Banner.png");
+    }
 
     /* Game Section */
 
+    .bet {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: left;
+        justify-content: left;
+    }
+
+    .label {
+        width: 20% !important;
+    }
+
+    .label h3 {
+        text-align: left !important;
+    }
+
+    .betIn {
+        width: 80% !important;
+    }
+
     .betIn input {
-        width: 80%;
+        width: 100% !important;
     }
 
     .gamemoves {
-        padding: 5px;
+        padding: 0;
     }
 
     .gamemoves button {
@@ -257,11 +290,6 @@ body {
 }
 
 @media (max-width: 500px) {
-
-    /* Nav Bar */
-    .navbar-brand {
-        margin: auto;
-    }
 
     /* Banner Image */
     .bannerimgcnt img {
