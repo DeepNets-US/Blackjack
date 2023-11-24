@@ -241,9 +241,12 @@ body {
     }
 
     .betIn input,
-    .money h3,
-    .gameName h1 {
+    .money h3 {
         font-size: 1em !important;
+    }
+
+    .gameName h1 {
+        font-size: 1.5em;
     }
 
     .bet {
@@ -284,12 +287,14 @@ body {
 
 
     /* How to Play section */
-    .objdiv {
+    .objdiv,
+    .actdiv {
         width: 50%;
     }
 
-    .actdiv {
-        width: 50%;
+    .actdiv h2,
+    .objdiv h2 {
+        font-size: 1.7em !important;
     }
 
     .actdesc li {
@@ -317,8 +322,9 @@ body {
         font-size: 1.2em;
     }
 
+    .betIn,
     .betIn input {
-        width: 100%;
+        width: 100% !important;
     }
 
     /* Game Display */
@@ -332,6 +338,12 @@ body {
         margin: auto;
     }
 
+    /* Game Score Display */
+    .dealerScore h2,
+    .playerScore h2 {
+        font-size: 1em;
+    }
+
     /* Game Moves */
     .gamemoves {
         flex-wrap: wrap;
@@ -340,6 +352,7 @@ body {
     .gamemoves button {
         width: 100%;
     }
+
 
     /* How to text */
     .howto {
