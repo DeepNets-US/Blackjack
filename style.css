@@ -355,7 +355,8 @@ body {
     }
 
     .actdiv p,
-    .objdiv p {
+    .objdiv p,
+    .historytext p {
         font-size: 0.8em !important;
     }
 
