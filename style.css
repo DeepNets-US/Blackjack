@@ -292,11 +292,6 @@ body {
         width: 50%;
     }
 
-    .actdiv h2,
-    .objdiv h2 {
-        font-size: 1.7em !important;
-    }
-
     .actdesc li {
         font-size: 15px;
     }
@@ -351,6 +346,17 @@ body {
 
     .gamemoves button {
         width: 100%;
+    }
+
+    /* Objective and Actions */
+    .actdiv h2,
+    .objdiv h2 {
+        font-size: 1.7em !important;
+    }
+
+    .actdiv p,
+    .objdiv p {
+        font-size: 0.8em !important;
     }
 
 
