@@ -1,3 +1,23 @@
+// Firebase Authentication
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+import { getDatabase, set, get, ref } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCxnfhr6v1gwGsckxH4BKACNP_-6DnS3hM",
+    authDomain: "blackjack-b07cb.firebaseapp.com",
+    projectId: "blackjack-b07cb",
+    storageBucket: "blackjack-b07cb.appspot.com",
+    messagingSenderId: "177108375726",
+    appId: "1:177108375726:web:3b9d57a32ac9b6d707353f"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+
+
 // DOM elements
 const moneyTxt = document.getElementById("moneyTxt");
 const betIn = document.getElementById("betIn");
@@ -39,11 +59,36 @@ let money = 5000;
 let dealer = 0;
 let player = 0;
 let betValue = 0;
+let userBet = 0;
+
+// Statistics object
+const stats = {
+    gamesPlayed: 0,
+    gamesWon: 0,
+    gamesLost: 0,
+    moneyEarned: 0,
+    totalBet: 0,
+    currentMoney: money,
+    hits: 0,
+    stands: 0,
+    doubleDowns: 0,
+    brokeMoments: 0
+};
+
 
 // Functions
+function saveStatsToDatabase(stats) {
+    const userId = auth.currentUser.uid;
+    const userRef = ref(db, `users/${userId}/gamingData`);
+    set(userRef, stats).then(() => {
+        console.log('Stats saved to the database!');
+    }).catch((error) => {
+        console.error('Error saving stats to the database:', error);
+    });
+}
 
 function createDeck() {
-    // Creates a deck of cards
+    DECK = [];
     for (let suit of SUITS) {
         for (let card of CARDS) {
             DECK.push([suit, card]);
@@ -52,13 +97,11 @@ function createDeck() {
 }
 
 function getCard() {
-    // Gets a random card from the deck
     const index = Math.floor(Math.random() * DECK.length);
     return DECK.splice(index, 1)[0];
 }
 
 function drawCard(deck, n = 1) {
-    // Draws cards from the deck for the player or dealer
     for (let i = 0; i < n; i++) {
         const card = getCard();
         if (deck === 'p') {
@@ -72,7 +115,6 @@ function drawCard(deck, n = 1) {
 }
 
 function updatePoints(value, user) {
-    // Updates points for the player or dealer
     value = typeof value === 'string' ? POINTS[value] : value;
     user === 'p' ? (player += value) : (dealer += value);
 }
@@ -120,10 +162,10 @@ function displayHands(hideDealerHand) {
 
 function assignBet(betAmount) {
     betValue += betAmount;
+    stats.totalBet += betAmount;
 }
 
 function initialState() {
-    // Initializes the game state
     player = 0;
     dealer = 0;
     playerHand = [];
@@ -138,6 +180,7 @@ function initialState() {
     gameResultTxt.innerHTML = '';
     moneyTxt.innerHTML = money;
 }
+
 // Function to manage dealer's actions
 function dealerPlay() {
     if (player <= 21) {
@@ -153,6 +196,7 @@ function hit() {
     if (userBet > 0) {
         drawCard('p');
         displayHands(true);
+        stats.hits++;
 
         if (player > 21) {
             checkResult();
@@ -167,6 +211,7 @@ function hit() {
 function stand() {
     userBet = parseInt(betIn.value);
     if (userBet > 0) {
+        stats.stands++;
         checkResult();
     } else {
         alert("Choose your bet!");
@@ -180,6 +225,7 @@ function doubleDown() {
     if (userBet > 0) {
         assignBet(betValue);
         drawCard("p");
+        stats.doubleDowns++;
         checkResult();
     } else {
         alert("Choose your bet!");
@@ -192,73 +238,78 @@ function checkResult() {
     dealerPlay();
     displayHands();
 
+    stats.gamesPlayed++;
+
+    let resultText;
     if (dealer > 21) {
-        const resultText = `Dealer busts! You win ${userBet}!`;
+        resultText = `Dealer busts! You win ${userBet}!`;
         gameResultTxt.innerHTML = resultText;
         gameResultTxt.style.color = "lightgreen";
         winSound.play();
 
-        money = money + betValue;
-        moneyTxt.innerHTML = money;
-        betIn.value = '';
-        betValue = 0;
-
+        money += betValue;
+        stats.moneyEarned += betValue;
+        stats.gamesWon++;
     } else if (player > 21 || player < dealer) {
-        const resultText = `You lost!`;
+        resultText = `You lost!`;
         gameResultTxt.innerHTML = resultText;
         gameResultTxt.style.color = "red";
         bruhSound.play();
 
-        money = money - betValue;
-        moneyTxt.innerHTML = money;
-        betIn.value = '';
-        betValue = 0;
-
+        money -= betValue;
+        stats.gamesLost++;
     } else if (player > dealer) {
-        const resultText = `You won ${userBet}!`;
+        resultText = `You won ${userBet}!`;
         gameResultTxt.innerHTML = resultText;
         gameResultTxt.style.color = "lightgreen";
         winSound.play();
 
-        money = money + betValue;
-        moneyTxt.innerHTML = money;
-        betIn.value = '';
-        betValue = 0;
-
+        money += betValue;
+        stats.moneyEarned += betValue;
+        stats.gamesWon++;
     } else if (player === dealer) {
-        const resultText = `It is a tie, the bet is returned to you.`;
+        resultText = `It is a tie, the bet is returned to you.`;
         gameResultTxt.innerHTML = resultText;
         gameResultTxt.style.color = "yellow";
         bruhSound.play();
-
-        moneyTxt.innerHTML = money;
-        betIn.value = '';
-        betValue = 0;
     }
-
 
     // Check if the player has gone broke
     if (money <= 0) {
-        moneyTxt.innerHTML = 0;
+        money = 0;
         gameResultTxt.innerHTML = 'You Went Broke!!';
         moneyTxt.style.color = "red";
         brokeSound.play();
+        stats.brokeMoments++;
     }
 
-    if (money > 5000) {
-        moneyTxt.style.color = "lightgreen";
-    } else if (money < 5000) {
-        moneyTxt.style.color = "orange";
-    } else {
-        moneyTxt.style.color = "white";
-    }
+    moneyTxt.innerHTML = money;
+    betIn.value = '';
+    betValue = 0;
+
+    // Update current money in stats
+    stats.currentMoney = money;
+
+    // Display updated statistics
+    console.log(`Games Played: ${stats.gamesPlayed}`);
+    console.log(`Games Won: ${stats.gamesWon}`);
+    console.log(`Games Lost: ${stats.gamesLost}`);
+    console.log(`Money Earned: ${stats.moneyEarned}`);
+    console.log(`Total Bet Placed: ${stats.totalBet}`);
+    console.log(`Current Money: ${stats.currentMoney}`);
+    console.log(`Hits: ${stats.hits}`);
+    console.log(`Stands: ${stats.stands}`);
+    console.log(`Double Downs: ${stats.doubleDowns}`);
+    console.log(`Broke Moments: ${stats.brokeMoments}`);
+
+    // Update data on database
+    saveStatsToDatabase(stats);
 }
 
 // Event listener for bet input
 betIn.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
         const userBet = parseInt(betIn.value);
-
         if (userBet > 0 && userBet <= money) {
             assignBet(userBet);
             initialState();
@@ -273,3 +324,13 @@ betIn.addEventListener("keyup", function (event) {
 hitbtn.addEventListener("click", hit);
 standbtn.addEventListener("click", stand);
 doublebtn.addEventListener("click", doubleDown);
+
+// Add onAuthStateChanged callback
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const userID = user.uid;
+        // Load data
+    } else {
+        console.log('User is signed out');
+    }
+});
