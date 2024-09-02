@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>Stats Dashboard</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .card {
+            background-color: #f3eeee;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .card p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        #home {
+            background-color: black;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div class="container">
+        <div class="card" id="gamesPlayed" style="background-color: cyan;">
+
+            <h2>Games Played</h2>
+            <p id="gamesPlayedValue">0</p>
+        </div>
+        <div class="card" id="gamesWon" style="background-color: #4CAF50;">
+            <h2>Games Won</h2>
+            <p id="gamesWonValue">0</p>
+        </div>
+        <div class="card" id="gamesLost" style="background-color: #f44336;">
+            <h2>Games Lost</h2>
+            <p id="gamesLostValue">0</p>
+        </div>
+        <div class="card" id="moneyEarned" style="background-color: #03A9F4;">
+
+            <h2>Money Earned</h2>
+            <p id="moneyEarnedValue">$0</p>
+        </div>
+        <div class="card" id="totalBet" style="background-color: #FF9800;">
+
+            <h2>Total Bet Placed</h2>
+            <p id="totalBetValue">$0</p>
+        </div>
+        <div class="card" id="currentMoney" style="background-color: #8BC34A;">
+
+            <h2>Current Money</h2>
+            <p id="currentMoneyValue">$0</p>
+        </div>
+        <div class="card" id="hits" style="background-color: #d085f2;">
+
+            <h2>Hits</h2>
+            <p id="hitsValue">0</p>
+        </div>
+        <div class="card" id="stands" style="background-color: #d085f2;">
+
+            <h2>Stands</h2>
+            <p id="standsValue">0</p>
+        </div>
+        <div class="card" id="doubleDowns" style="background-color: #d085f2;">
+
+            <h2>Double Downs</h2>
+            <p id="doubleDownsValue">0</p>
+        </div>
+        <div class="card" id="brokeMoments" style="background-color: crimson;">
+
+            <h2>Broke Moments</h2>
+            <p id="brokeMomentsValue">None</p>
+        </div>
+        <div class="card" id="home">
+            <a href="index.html" class="btn btn-primary btn-lg btn-home">Go Back Home</a>
+        </div>
+    </div>
+
+    <script type="module">
+        import { stats } from './stats.js'; // Ensure the path is correct
+
+        document.getElementById('gamesPlayedValue').textContent = stats.gamesPlayed;
+        document.getElementById('gamesWonValue').textContent = stats.gamesWon;
+        document.getElementById('gamesLostValue').textContent = stats.gamesLost;
+        document.getElementById('moneyEarnedValue').textContent = `$${stats.moneyEarned}`;
+        document.getElementById('totalBetValue').textContent = `$${stats.totalBet}`;
+        document.getElementById('currentMoneyValue').textContent = `$${stats.currentMoney}`;
+        document.getElementById('hitsValue').textContent = stats.hits;
+        document.getElementById('standsValue').textContent = stats.stands;
+        document.getElementById('doubleDownsValue').textContent = stats.doubleDowns;
+        document.getElementById('brokeMomentsValue').textContent = stats.brokeMoments.length > 0 ? stats.brokeMoments.join(', ') : 'None';
+    </script>
+</body>
+
+</html>

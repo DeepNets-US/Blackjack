@@ -1,0 +1,412 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+/* Navbar Section */
+
+.nav-item {
+    margin-right: 5px;
+}
+
+.nav-item:hover {
+    font-weight: bold;
+}
+
+/* How to Play section */
+.howto {
+    padding-top: 50px;
+    width: 100%;
+}
+
+#howtotext {
+    font-size: 4em;
+    font-weight: bold;
+}
+
+.howtodata {
+    display: flex;
+    flex-wrap: row;
+    align-items: left;
+    justify-content: left;
+}
+
+.objdiv {
+    text-align: left;
+    width: 25%;
+}
+
+.objdiv p {
+    margin-top: 20%;
+}
+
+.actdiv {
+    width: 35%;
+}
+
+.imgdiv {
+    width: 40%;
+}
+
+.howtoimg {
+    width: 100%;
+    height: auto;
+}
+
+.howtoimg:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.5s linear;
+}
+
+.actdesc {
+    margin-left: 40px;
+}
+
+.actionname {
+    margin-top: 10px;
+}
+
+
+/* History Section */
+
+.historydiv {
+    display: flex;
+    flex-wrap: row;
+    text-align: left;
+    justify-content: left;
+    margin-top: 50px;
+}
+
+.historyimg:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.5s linear;
+}
+
+.historytext {
+    font-size: 1.2em;
+    margin-left: 10px;
+    margin-right: 30px;
+    text-align: justify;
+}
+
+/* Game Section */
+.gamesection {
+    margin-top: 50px;
+    padding: 50px;
+
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+}
+
+.gamemoves,
+.gameRes,
+.gameName {
+    padding: 10px;
+    width: 100%;
+    /* border: 10px solid white; */
+}
+
+.gameName h1 span:hover {
+    color: white;
+}
+
+.gameDisplay,
+.bet,
+.gameScores,
+.gameMB {
+    display: flex;
+    text-align: center;
+    justify-content: middle;
+}
+
+.gameDisplay,
+.gameScores,
+.gameMB {
+    width: 100%;
+    margin: 10px;
+}
+
+.gameDisplay div,
+.gameScores div,
+.gameMB div {
+    width: 50%;
+}
+
+
+.label {
+    padding-right: 10px;
+}
+
+/* Bet Input */
+
+.betIn input {
+    width: 50%;
+    height: 100%;
+    background-color: transparent;
+    color: white;
+    font-size: 1.2em;
+    text-align: left;
+    border: none;
+    border-bottom: 2px solid white;
+
+}
+
+.betIn input:focus {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid white;
+}
+
+.betIn input[type="number"]::-webkit-inner-spin-button,
+.betIn input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Game Moves */
+.gamemoves button {
+    width: 30%;
+    margin: 5px;
+    font-size: 1.5em;
+    border: none;
+}
+
+.gamemoves button:hover {
+    font-weight: bolder;
+}
+
+/* Image Displays */
+.gameDisplay div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.carousel-inner img {
+    max-width: 300px;
+    margin: auto;
+}
+
+/* Media Query */
+@media (max-width: 1024px) {
+
+    /* How to play section */
+    .objdiv {
+        width: 35%;
+    }
+
+    .actdiv {
+        width: 40%;
+    }
+
+    /* History section */
+    .historydiv {
+        flex-wrap: wrap;
+    }
+
+    .historyimg img {
+        width: 100%;
+        height: auto;
+        content: url('Images/history\ banner.png');
+    }
+
+    .historytext {
+        margin-top: 10px;
+    }
+}
+
+
+/* Tabley Screens */
+@media (max-width: 800px) {
+
+    /* Nav Bar */
+    .navbar-brand {
+        padding: 0 !important;
+        font-size: 2em;
+        margin: auto;
+    }
+
+    /* Banner Image */
+    .bannerimgcnt img {
+        content: url("Images/Blackjack\ -\ Phone\ Banner.png");
+    }
+
+    /* Game Section */
+    .gameName {
+        display: none;
+    }
+
+    .label {
+        display: none;
+    }
+
+    .betIn input,
+    .money h3 {
+        font-size: 1em !important;
+    }
+
+    .gameName h1 {
+        font-size: 1.4em;
+    }
+
+    .bet {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: left;
+        justify-content: left;
+    }
+
+    .label {
+        width: 20% !important;
+    }
+
+    .label h3 {
+        text-align: left !important;
+    }
+
+    .betIn {
+        width: 80% !important;
+    }
+
+    .betIn input {
+        width: 100% !important;
+    }
+
+    .carousel-inner img {
+        max-width: 500px !important;
+    }
+
+    .gamemoves {
+        padding: 0;
+    }
+
+    .gamemoves button {
+        padding: none;
+        font-size: 1.2em;
+    }
+
+
+    /* How to Play section */
+    .objdiv,
+    .actdiv {
+        width: 50%;
+    }
+
+    .actdesc li {
+        font-size: 15px;
+    }
+
+    .imgdiv,
+    .howtoimg {
+        display: none;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 500px) {
+
+    /* Banner Image */
+    .bannerimgcnt img {
+        content: url("Images/Blackjack\ -\ Phone\ Banner.png");
+    }
+
+    /* Game Input */
+    .money h3,
+    .bet h3,
+    .betIn input {
+        font-size: 1.2em;
+    }
+
+    .betIn,
+    .betIn input {
+        width: 100% !important;
+    }
+
+    /* Game Display */
+    .gameDisplay {
+        flex-wrap: wrap;
+    }
+
+    /* Game Image */
+    .carousel-inner img {
+        max-width: 100px;
+        margin: auto;
+    }
+
+    /* Game Score Display */
+    .dealerScore h2,
+    .playerScore h2 {
+        font-size: 1em;
+    }
+
+    /* Game Moves */
+    .gamemoves {
+        flex-wrap: wrap;
+    }
+
+    .gamemoves button {
+        width: 100%;
+    }
+
+    /* Objective and Actions */
+    .actdiv h2,
+    .objdiv h2 {
+        font-size: 1.7em !important;
+    }
+
+    .actdiv p,
+    .objdiv p,
+    .historytext p {
+        font-size: 0.8em !important;
+    }
+
+    .historytext p {
+        text-align: left;
+    }
+
+    /* How to text */
+    .howto {
+        margin: 0;
+        padding: 0;
+    }
+
+    #howtotext {
+        font-size: 3em;
+        margin: 0;
+    }
+
+    .howtodata {
+        padding: 0;
+        flex-wrap: wrap;
+    }
+
+    .howtodata div {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .howtodata div h2 {
+        margin: 0;
+        font-size: 3em;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .howtodata div p {
+        margin: 0;
+        padding: 0;
+    }
+
+    .actdesc {
+        margin: 0;
+        padding: 0;
+
+    }
+
+
+}

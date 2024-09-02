@@ -1,0 +1,45 @@
+/* Mobile devices (max-width: 768px) */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 0;
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    .btn {
+        margin-bottom: 5px;
+    }
+}
+
+/* Tablets (min-width: 769px) and (max-width: 992px) */
+@media (min-width: 769px) and (max-width: 992px) {
+    .container-fluid {
+        padding: 10px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .btn {
+        margin-bottom: 10px;
+    }
+}
+
+/* Desktops (min-width: 993px) */
+@media (min-width: 993px) {
+    .container-fluid {
+        padding: 20px;
+    }
+
+    .card-body {
+        max-width: 80%;
+        padding: 20px;
+    }
+
+    .btn {
+        margin-bottom: 15px;
+    }
+}
